@@ -66,7 +66,9 @@ const Fab: React.FC<FabProps> = ({
   };
   
   useEffect(()=>{
-    setIsOpen(onOpen);
+    if(onOpen!==undefined){
+      setIsOpen(onOpen);
+    }
   },[onOpen])
 
   const actionOnClick = (e: React.FormEvent, userFunc: (e: React.FormEvent) => void) => {
