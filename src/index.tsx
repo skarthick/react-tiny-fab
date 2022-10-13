@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './styles.scss';
 
@@ -34,6 +34,7 @@ interface FabProps {
   mainButtonStyles?: React.CSSProperties;
   onClick?: (e: React.FormEvent) => void;
   text?: string;
+  onOpen?: boolean;
   children?: React.ReactNode;
 }
 
@@ -45,6 +46,7 @@ const Fab: React.FC<FabProps> = ({
   icon,
   mainButtonStyles,
   onClick,
+  onOpen,
   text,
   ...p
 }) => {
@@ -62,6 +64,10 @@ const Fab: React.FC<FabProps> = ({
     e.persist();
     return interpolatedEvent === 'click' ? (isOpen ? close() : open()) : null;
   };
+  
+  useEffect(()=>{
+    setIsOpen(onOpen);
+  },[onOpen])
 
   const actionOnClick = (e: React.FormEvent, userFunc: (e: React.FormEvent) => void) => {
     e.persist();
